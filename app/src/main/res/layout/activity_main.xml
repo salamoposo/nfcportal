@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5F6F94"
+    android:background="#E0F7FA"
     tools:context=".MainActivity">
 
 
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             app:cardElevation="4dp"
-            android:backgroundTint="#97FFFFFF"
+            android:backgroundTint="@color/white"
             >
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -31,6 +31,7 @@
                     android:layout_marginStart="4dp"
                     android:src="@drawable/ic_baseline_credit_card_24" />
                 <ImageView
+                    android:id="@+id/tentang"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="4dp"
@@ -48,7 +49,7 @@
             android:text="REGISTRASI KARTU"
             android:layout_gravity="center"
             android:textSize="24dp"
-            android:textColor="#97D2EC"
+            android:textColor="#585C5E"
             android:fontFamily="sans-serif-condensed"
             android:layout_marginTop="10dp"/>
 
@@ -61,7 +62,7 @@
             android:src="@drawable/rfid"/>
 
         <androidx.cardview.widget.CardView
-            android:backgroundTint="#B3FFFFFF"
+            android:backgroundTint="@color/white"
             android:layout_width="350dp"
             android:layout_height="350dp"
             android:layout_gravity="center"
