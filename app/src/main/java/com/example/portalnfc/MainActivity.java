@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageView about_btn;
     private ProgressBar progressBar;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference userdb, idcarddb;
+    private DatabaseReference userdb, idcarddb, idcardpush;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser fbuser;
 
-    final String[] IdKartu = {""};
+    String IdKartu;
 
     Integer matchid = 0;
     int a = 0;
@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    IdKartu[0] = snapshot.getValue(String.class);
-                    edtkartu.setText(IdKartu[0]);
+                    IdKartu = snapshot.getValue(String.class);
+                    edtkartu.setText(IdKartu);
                 }
             }
 
@@ -171,13 +171,15 @@ public class MainActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                 if (task.isSuccessful()) {
-                                                    User newUser = new User(Nama, Email, Nim, IdKartu[0]);
+                                                    User newUser = new User(Nama, Email, Nim, IdKartu);
                                                     String userid = auth.getUid();
                                                     userdb = database.getReference("User");
                                                     userdb.child(userid).setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             Toast.makeText(MainActivity.this, "Berhasil Registrasi ", Toast.LENGTH_SHORT).show();
+                                                            idcardpush = database.getReference("userId").push();
+                                                            idcardpush.setValue(IdKartu);
                                                             progressBar.setVisibility(View.GONE);
                                                             idcarddb = database.getReference("uId");
                                                             idcarddb.setValue("");
